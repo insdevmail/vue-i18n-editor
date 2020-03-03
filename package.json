@@ -44,8 +44,11 @@
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-scss": "^3.14.2",
+    "svgo": "^1.1.0",
+    "svgo-loader": "^2.1.0",
     "vue-cli-plugin-electron-builder": "^1.4.5",
     "vue-cli-plugin-style-resources-loader": "^0.1.4",
+    "vue-cli-plugin-svg-sprite": "^1.0.0",
     "vue-cli-plugin-tailwind": "^1.2.0",
     "vue-template-compiler": "^2.6.11"
   }
