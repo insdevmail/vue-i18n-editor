@@ -1,0 +1,6 @@
+@function rgba($color, $alpha) {
+  @return unquote('rgba(#{$color}, #{$alpha})');
+}
+@function darken($color, $percent) {
+  @return unquote('color(#{$color} shade(#{$percent}))');
+}
