@@ -3,12 +3,7 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: [
-    'plugin:vue/recommended',
-    '@vue/airbnb',
-    'prettier/vue',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['plugin:vue/recommended', '@vue/airbnb', 'prettier/vue', 'plugin:prettier/recommended'],
   parserOptions: {
     parser: 'babel-eslint',
   },
@@ -40,10 +35,13 @@ module.exports = {
       },
     ],
     'import/no-extraneous-dependencies': 0,
-    'import/extensions': ['error', {
-      js: 'never',
-      vue: 'never',
-    }]
+    'import/extensions': [
+      'error',
+      {
+        js: 'never',
+        vue: 'never',
+      },
+    ],
   },
   settings: {
     'import/resolver': {
