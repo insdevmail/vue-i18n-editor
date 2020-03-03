@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="[$style['wrapper']]" class="flex justify-center items-center">
     Home
   </div>
 </template>
@@ -10,4 +10,8 @@ export default {
 };
 </script>
 
-<style lang="scss" module></style>
+<style lang="scss" module>
+.wrapper {
+  height: 100vh;
+}
+</style>
