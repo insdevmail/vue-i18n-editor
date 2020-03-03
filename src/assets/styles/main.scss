@@ -1,6 +1,8 @@
 @import 'base/variables';
 @import 'base/functions';
 
+@import 'components/popup';
+
 body {
   background-color: theme('colors.gray.900');
   color: theme('colors.gray.200');

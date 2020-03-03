@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VModal from 'vue-js-modal';
 import App from './App';
 import router from './router';
 import store from './store';
@@ -12,6 +13,8 @@ import Icon from './components/ui/Icon';
 Vue.component('CButton', CButton);
 Vue.component('CLoader', CLoader);
 Vue.component('Icon', Icon);
+
+Vue.use(VModal);
 
 Vue.config.productionTip = false;
 
