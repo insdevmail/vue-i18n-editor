@@ -42,6 +42,7 @@ module.exports = {
         vue: 'never',
       },
     ],
+    'vue/no-html': 0,
   },
   settings: {
     'import/resolver': {

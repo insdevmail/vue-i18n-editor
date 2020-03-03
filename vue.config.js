@@ -6,10 +6,15 @@ module.exports = {
     },
   },
 
-  chainWebpack: config => {
-    config.module
-      .rule('svg-sprite')
-      .use('svgo-loader')
-      .loader('svgo-loader');
+  configureWebpack: config => {
+    config.module.rules
+      .filter(r => r.test.toString().includes('svg'))
+      .forEach(r => {
+        r.test = /\.(png|jpe?g|gif)$/; // eslint-disable-line
+      });
+    config.module.rules.push({
+      test: /\.svg$/,
+      loader: 'svg-loader',
+    });
   },
 };

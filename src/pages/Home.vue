@@ -1,6 +1,6 @@
 <template>
   <div :class="[$style['wrapper']]" class="flex justify-center items-center">
-    Home
+    <CButton icon="solid/plus">Create project</CButton>
   </div>
 </template>
 
