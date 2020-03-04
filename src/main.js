@@ -9,10 +9,16 @@ import './assets/styles/main.scss';
 import CButton from './components/ui/CButton';
 import CLoader from './components/ui/CLoader';
 import Icon from './components/ui/Icon';
+import CRadio from './components/ui/form/CRadio';
+import CFileInput from './components/ui/form/CFileInput';
+import CInput from './components/ui/form/CInput';
 
 Vue.component('CButton', CButton);
 Vue.component('CLoader', CLoader);
 Vue.component('Icon', Icon);
+Vue.component('CRadio', CRadio);
+Vue.component('CFileInput', CFileInput);
+Vue.component('CInput', CInput);
 
 Vue.use(VModal);
 
