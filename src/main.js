@@ -15,6 +15,7 @@ import CRadio from './components/ui/form/CRadio';
 import CFileInput from './components/ui/form/CFileInput';
 import CInput from './components/ui/form/CInput';
 import CSelect from './components/ui/form/CSelect';
+import CToolbarButton from './components/ui/CToolbarButton';
 
 Vue.component('CButton', CButton);
 Vue.component('CLoader', CLoader);
@@ -23,6 +24,7 @@ Vue.component('CRadio', CRadio);
 Vue.component('CFileInput', CFileInput);
 Vue.component('CInput', CInput);
 Vue.component('CSelect', CSelect);
+Vue.component('CToolbarButton', CToolbarButton);
 
 Vue.use(VModal);
 Vue.component('Multiselect', Multiselect);

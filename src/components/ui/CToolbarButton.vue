@@ -3,25 +3,16 @@
     :is="component"
     :to="to"
     :class="[$style.button, ...classes]"
-    class="py-3 px-4 rounded-sm"
+    class="p-2 rounded-lg text-sm"
     v-bind="$attrs"
     :disabled="isDisabled && !isLink"
     v-on="$listeners"
     @click="handleClick"
   >
-    <div
-      v-if="icon"
-      :class="[$style.button__icon, { [$style['button__icon--before']]: $slots.default }]"
-    >
+    <div v-if="icon" :class="[$style.button__icon]">
       <Icon :name="icon" />
     </div>
     <slot />
-    <div
-      v-if="$slots.iconAfter"
-      :class="[$style['fl-button__icon'], { [$style['fl-button__icon--after']]: $slots.default }]"
-    >
-      <slot name="iconAfter" />
-    </div>
     <div v-if="loading" :class="$style.button__loader">
       <CLoader :size="size" :color="color" />
     </div>
@@ -32,20 +23,29 @@
 import buttonMixin from '../../mixins/buttonMixin';
 
 export default {
-  name: 'VButton',
+  name: 'CToolbarButton',
   mixins: [buttonMixin],
+  props: {
+    icon: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>
 
-<style module lang="scss">
+<style lang="scss" module>
 .button {
-  transition: color 0.4s ease-out, background-color 0.4s ease-out;
+  transition: border-color 0.4s ease-out, background-color 0.4s ease-out;
   display: inline-block;
   line-height: 1;
   text-align: center;
   color: #fff;
   position: relative;
   overflow: hidden;
+  min-width: 60px;
+  height: 70px;
+  border-width: 2px;
 
   &:focus {
     @apply shadow-outline outline-none;
@@ -53,24 +53,23 @@ export default {
 
   &--color-primary,
   &__loader {
-    @apply bg-blue-500;
+    @apply border-blue-500;
 
     &:hover {
-      @apply bg-blue-600;
+      @apply border-blue-600 bg-gray-700;
     }
 
     &[disabled],
     &.disabled {
-      @apply bg-blue-200;
+      @apply border-blue-200;
     }
   }
 
   &__icon {
-    display: inline-block;
     vertical-align: 1px;
-    width: 14px;
-    height: 14px;
-    margin: -1px 0 0px;
+    width: 24px;
+    height: 24px;
+    margin: 0 auto 5px;
 
     &--before {
       margin-right: 0.35em;
