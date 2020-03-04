@@ -28,9 +28,10 @@ export default {
 .input {
   display: block;
   position: relative;
+  @apply mb-4;
 
   &__field {
-    @apply w-full py-2 px-4 bg-gray-200 text-gray-800 border-2 border-gray-500 rounded-lg;
+    @apply w-full py-2 px-4 text-gray-800 border-2 border-gray-500 rounded-lg;
 
     &:focus {
       @apply outline-none border-blue-500;

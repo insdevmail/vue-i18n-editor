@@ -38,8 +38,9 @@ export default {
   name: 'PopupNewProject',
   methods: {
     handleFileUpload(file) {
-      console.log(file);
-      this.$modal.show('add-language-file');
+      if (file) {
+        this.$modal.show('add-language-file');
+      }
     },
   },
 };

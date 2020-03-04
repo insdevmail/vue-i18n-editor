@@ -1,0 +1,58 @@
+.multiselect {
+
+  &__tags {
+    @apply pt-2 px-4 text-gray-800 border-2 border-gray-500 rounded-lg;
+  }
+
+  &__placeholder {
+    @apply pb-2 mb-0 pt-0 text-base;
+    min-height: 0;
+    line-height: 24px;
+  }
+
+  &__input {
+    @apply pb-2 mb-0 pt-0 text-base pl-0;
+    min-height: 0;
+    line-height: 24px;
+  }
+
+  &__single {
+    @apply pl-0;
+    line-height: 24px;
+  }
+
+  &--active {
+    .multiselect__tags {
+      @apply border-blue-500;
+    }
+  }
+
+  &__select {
+    display: none;
+  }
+
+  &__content-wrapper {
+    @apply border-2 border-blue-500;
+    overflow: hidden;
+  }
+
+  &--above {
+    .multiselect {
+      &__content-wrapper {
+        @apply border-t-2 border-blue-500;
+      }
+    }
+  }
+
+  &__option {
+    &--highlight {
+      @apply bg-gray-200 text-blue-500;
+    }
+    &--selected {
+      @apply bg-gray-300 text-blue-500;
+      &.multiselect__option--highlight {
+        @apply bg-gray-200 text-blue-500;
+      }
+    }
+  }
+}
