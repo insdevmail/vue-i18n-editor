@@ -38,15 +38,16 @@ export default {
   data() {
     return {
       newTree: {},
+      data: null,
     };
   },
-  computed: {
-    data() {
-      if (this.tree) return new Tree(this.tree);
-      return null;
-    },
+  mounted() {
+    this.createTree();
   },
   methods: {
+    createTree() {
+      if (this.tree) this.data = new Tree(this.tree);
+    },
     onDel(node) {
       console.log(node);
       node.remove();
