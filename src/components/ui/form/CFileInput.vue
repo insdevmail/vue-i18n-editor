@@ -6,6 +6,7 @@
           :class="[$style['file__input']]"
           type="file"
           :name="name"
+          :accept="accept"
           @change="handleFileChange"
         />
       </label>
@@ -23,6 +24,10 @@ export default {
       default: 'solid/file',
     },
     name: {
+      type: String,
+      default: null,
+    },
+    accept: {
       type: String,
       default: null,
     },

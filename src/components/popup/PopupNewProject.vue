@@ -22,7 +22,7 @@
         </tbody>
       </table>
     </div>
-    <CFileInput @change="handleFileUpload">Add json file</CFileInput>
+    <CFileInput accept="application/json" @change="handleFileUpload">Add json file</CFileInput>
     <div class="text-right mt-4">
       <CButton>Create project</CButton>
     </div>
