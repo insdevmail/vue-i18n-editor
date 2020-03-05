@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       structure: null,
+      files: {},
     };
   },
   computed: {
@@ -50,9 +51,14 @@ export default {
   },
   methods: {
     async init() {
-      const mainLanguage = this.project.files.find(el => el.lang === this.project.primary);
-      const json = await fse.readJSON(mainLanguage.path);
-      this.structure = buildTree(json);
+      this.project.files.forEach(el => {
+        fse.readJSON(el.path).then(res => {
+          this.files[el.lang] = res;
+          if (el.lang === this.project.primary) {
+            this.structure = buildTree(res);
+          }
+        });
+      });
     },
   },
 };
