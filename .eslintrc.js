@@ -43,6 +43,7 @@ module.exports = {
       },
     ],
     'vue/no-html': 0,
+    'no-param-reassign': 0,
   },
   settings: {
     'import/resolver': {

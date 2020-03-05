@@ -2,5 +2,9 @@
   @apply py-4 px-8 bg-gray-900;
   &-overlay {
     background-color: rgba(theme('colors.gray.200'), 0.2);
+
+    .v--modal-box {
+      overflow: visible;
+    }
   }
 }
