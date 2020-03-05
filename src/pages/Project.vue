@@ -2,7 +2,7 @@
   <div class="page">
     <ProjectToolbar />
     <div :class="[$style['content']]">
-      <ProjectSidebar class="w-3/12" />
+      <ProjectSidebar class="w-3/12" :tree="structure" />
       <div :class="[$style['main']]" class="w-9/12">
         <div :class="[$style['main__top']]" class="py-1 px-2 text-sm">
           <span class="font-semibold">Translations:</span>
@@ -21,6 +21,26 @@ import * as fse from 'fs-extra';
 import ProjectToolbar from '../../blocks/project/ProjectToolbar';
 import ProjectSidebar from '../../blocks/project/ProjectSidebar';
 import TranslationItem from '../components/translation/TranslationItem';
+
+function buildTree(json) {
+  const tree = [];
+  const keys = Object.keys(json);
+  if (keys.length > 0) {
+    keys.forEach(el => {
+      const nested = {
+        name: el,
+        dragDisabled: true,
+      };
+      if (typeof json[el] === 'string') {
+        nested.isLeaf = true;
+      } else {
+        nested.children = buildTree(json[el]);
+      }
+      tree.push(nested);
+    });
+  }
+  return tree;
+}
 
 export default {
   name: 'PageProject',
@@ -49,7 +69,8 @@ export default {
   methods: {
     async init() {
       const mainLanguage = this.project.files.find(el => el.lang === this.project.primary);
-      this.structure = await fse.readJSON(mainLanguage.path);
+      const json = await fse.readJSON(mainLanguage.path);
+      this.structure = buildTree(json);
     },
   },
 };
