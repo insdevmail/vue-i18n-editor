@@ -2,13 +2,14 @@ const emptyState = {
   title: '',
   files: [],
   languages: [],
+  primary: null,
 };
 
 const state = () => emptyState;
 
 const getters = {
   files: initialState => initialState.files,
-  isProjectOpen: initialState => Boolean(initialState.title),
+  isProjectOpen: initialState => Boolean(initialState.title) && Boolean(initialState.primary),
 };
 
 const mutations = {
@@ -16,8 +17,9 @@ const mutations = {
     initialState.languages.push(data.lang);
     initialState.files.push(data.file);
   },
-  setTitle(initialState, data) {
-    initialState.title = data;
+  setProject(initialState, data) {
+    initialState.title = data.title;
+    initialState.primary = data.primary;
   },
 };
 

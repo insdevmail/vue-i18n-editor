@@ -2,7 +2,7 @@
   <Modal name="new-project" height="auto">
     <div class="text-center font-semibold text-2xl mb-6">New project configuration</div>
     <ValidationObserver ref="validator" tag="form" @submit.prevent="handleSubmit">
-      <CInput name="title" v-model="title" placeholder="Project title" rules="required" />
+      <CInput v-model="title" name="title" placeholder="Project title" rules="required" />
       <div v-if="files.length > 0">
         <table class="table mb-4">
           <thead>
@@ -17,7 +17,7 @@
               <th scope="row">{{ item.langLabel }}</th>
               <td>{{ item.path }}</td>
               <td>
-                <CRadio name="isPrimary" />
+                <CRadio v-model="primary" name="primary" :value="item.lang" />
               </td>
             </tr>
           </tbody>
@@ -39,6 +39,7 @@ export default {
   data() {
     return {
       title: null,
+      primary: null,
     };
   },
   computed: {
@@ -51,7 +52,7 @@ export default {
       addFileToProject: 'project/addFileToProject',
     }),
     ...mapMutations({
-      setTitle: 'project/setTitle',
+      setProject: 'project/setProject',
     }),
     handleFileUpload(file) {
       if (file) {
@@ -67,8 +68,11 @@ export default {
     },
     async handleSubmit() {
       const isValid = await this.$refs.validator.validate();
-      if (isValid && this.files.length > 0) {
-        this.setTitle(this.title);
+      if (isValid && this.files.length > 1) {
+        this.setProject({
+          title: this.title,
+          primary: this.primary,
+        });
         await this.$router.push('/project');
         this.$modal.hide('new-project');
       }

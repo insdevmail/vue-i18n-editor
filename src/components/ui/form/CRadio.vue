@@ -1,6 +1,12 @@
 <template>
   <label :class="[$style['radio'], { [$style['radio--has-content']]: $slots.default }]">
-    <input :class="$style['radio__input']" type="radio" :name="name" />
+    <input
+      v-model="innerValue"
+      :class="$style['radio__input']"
+      type="radio"
+      :name="name"
+      :value="value"
+    />
     <span :class="[$style['radio__dot']]" />
     <span :class="[$style['radio__text']]">
       <slot />
@@ -11,10 +17,28 @@
 <script>
 export default {
   name: 'CRadio',
+  model: {
+    prop: 'innerValue',
+    event: 'change',
+  },
   props: {
     name: {
       type: String,
       required: true,
+    },
+    value: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    innerValue: {
+      get() {
+        return this.value;
+      },
+      set() {
+        this.$emit('change', this.value);
+      },
     },
   },
 };
