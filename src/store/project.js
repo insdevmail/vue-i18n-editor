@@ -1,17 +1,23 @@
-const state = () => ({
+const emptyState = {
   title: '',
   files: [],
   languages: [],
-});
+};
+
+const state = () => emptyState;
 
 const getters = {
   files: initialState => initialState.files,
+  isProjectOpen: initialState => Boolean(initialState.title),
 };
 
 const mutations = {
   setData(initialState, data) {
     initialState.languages.push(data.lang);
     initialState.files.push(data.file);
+  },
+  setTitle(initialState, data) {
+    initialState.title = data;
   },
 };
 

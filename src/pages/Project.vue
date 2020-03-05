@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import ProjectToolbar from '../../blocks/project/ProjectToolbar';
 import ProjectSidebar from '../../blocks/project/ProjectSidebar';
 import TranslationItem from '../components/translation/TranslationItem';
@@ -26,6 +27,14 @@ export default {
     ProjectToolbar,
     ProjectSidebar,
     TranslationItem,
+  },
+  computed: {
+    ...mapGetters({
+      isProjectOpen: 'project/isProjectOpen',
+    }),
+  },
+  mounted() {
+    if (!this.isProjectOpen) this.$router.push('/');
   },
 };
 </script>

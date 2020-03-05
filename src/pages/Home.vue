@@ -5,8 +5,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'PageHome',
+  computed: {
+    ...mapGetters({
+      isProjectOpen: 'project/isProjectOpen',
+    }),
+  },
+  mounted() {
+    if (this.isProjectOpen) this.$router.push('/project');
+  },
 };
 </script>
 

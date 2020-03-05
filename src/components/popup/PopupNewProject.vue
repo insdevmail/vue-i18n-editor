@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'PopupNewProject',
@@ -50,6 +50,9 @@ export default {
     ...mapActions({
       addFileToProject: 'project/addFileToProject',
     }),
+    ...mapMutations({
+      setTitle: 'project/setTitle',
+    }),
     handleFileUpload(file) {
       if (file) {
         this.$modal.show('add-language-file', {
@@ -64,8 +67,10 @@ export default {
     },
     async handleSubmit() {
       const isValid = await this.$refs.validator.validate();
-      if (isValid) {
-        console.log('submit');
+      if (isValid && this.files.length > 0) {
+        this.setTitle(this.title);
+        await this.$router.push('/project');
+        this.$modal.hide('new-project');
       }
     },
   },
