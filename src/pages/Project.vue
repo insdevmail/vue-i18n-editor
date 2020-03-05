@@ -5,8 +5,11 @@
       <ProjectSidebar class="w-3/12" />
       <div :class="[$style['main']]" class="w-9/12">
         <div :class="[$style['main__top']]" class="py-1 px-2 text-sm">
-          Translations
+          <span class="font-semibold">Translations:</span>
+          <span class="ml-2 font-thin">path.to.translation</span>
         </div>
+        <TranslationItem />
+        <TranslationItem />
       </div>
     </div>
   </div>
@@ -15,12 +18,14 @@
 <script>
 import ProjectToolbar from '../../blocks/project/ProjectToolbar';
 import ProjectSidebar from '../../blocks/project/ProjectSidebar';
+import TranslationItem from '../components/translation/TranslationItem';
 
 export default {
   name: 'PageProject',
   components: {
     ProjectToolbar,
     ProjectSidebar,
+    TranslationItem,
   },
 };
 </script>
