@@ -6,6 +6,7 @@
     class="py-3 px-4 rounded-sm"
     v-bind="$attrs"
     :disabled="isDisabled && !isLink"
+    :type="component === 'button' ? type : null"
     v-on="$listeners"
     @click="handleClick"
   >

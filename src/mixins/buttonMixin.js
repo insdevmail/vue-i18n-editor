@@ -35,6 +35,10 @@ export default {
       required: false,
       default: null,
     },
+    type: {
+      type: String,
+      default: 'button',
+    },
   },
   computed: {
     component() {

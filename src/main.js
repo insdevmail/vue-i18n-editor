@@ -8,6 +8,8 @@ import './assets/styles/tailwind.css';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
 import './assets/styles/main.scss';
 
+import './plugins/vee-validate';
+
 import CButton from './components/ui/CButton';
 import CLoader from './components/ui/CLoader';
 import Icon from './components/ui/Icon';

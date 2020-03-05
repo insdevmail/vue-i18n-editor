@@ -1,7 +1,17 @@
 <template>
-  <div :class="$style['input']">
-    <input :type="type" :class="$style['input__field']" :placeholder="placeholder" :name="name" />
-  </div>
+  <ValidationProvider #default="{ errors }" :name="name" slim :rules="rules">
+    <div :class="$style['input']">
+      <input
+        v-model="innerValue"
+        :type="type"
+        :class="$style['input__field']"
+        :placeholder="placeholder"
+        :name="name"
+        @input="handleInput"
+      />
+      <div v-if="errors.length > 0" class="text-sm text-red-500 mt-1">{{ errors[0] }}</div>
+    </div>
+  </ValidationProvider>
 </template>
 
 <script>
@@ -19,6 +29,27 @@ export default {
     type: {
       type: String,
       default: 'text',
+    },
+    rules: {
+      type: String,
+      default: null,
+    },
+    value: {
+      type: String,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      innerValue: null,
+    };
+  },
+  mounted() {
+    this.innerValue = this.value;
+  },
+  methods: {
+    handleInput() {
+      this.$emit('input', this.innerValue);
     },
   },
 };
