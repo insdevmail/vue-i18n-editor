@@ -17,6 +17,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import * as fse from 'fs-extra';
 import ProjectToolbar from '../../blocks/project/ProjectToolbar';
 import ProjectSidebar from '../../blocks/project/ProjectSidebar';
 import TranslationItem from '../components/translation/TranslationItem';
@@ -28,13 +29,28 @@ export default {
     ProjectSidebar,
     TranslationItem,
   },
+  data() {
+    return {
+      structure: null,
+    };
+  },
   computed: {
     ...mapGetters({
       isProjectOpen: 'project/isProjectOpen',
+      project: 'project/project',
     }),
   },
   mounted() {
     if (!this.isProjectOpen) this.$router.push('/');
+    else {
+      this.init();
+    }
+  },
+  methods: {
+    async init() {
+      const mainLanguage = this.project.files.find(el => el.lang === this.project.primary);
+      this.structure = await fse.readJSON(mainLanguage.path);
+    },
   },
 };
 </script>

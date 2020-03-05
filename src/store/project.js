@@ -10,6 +10,7 @@ const state = () => emptyState;
 const getters = {
   files: initialState => initialState.files,
   isProjectOpen: initialState => Boolean(initialState.title) && Boolean(initialState.primary),
+  project: initialState => initialState,
 };
 
 const mutations = {
