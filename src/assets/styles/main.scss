@@ -9,3 +9,9 @@ body {
   background-color: theme('colors.gray.900');
   color: theme('colors.gray.200');
 }
+
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
