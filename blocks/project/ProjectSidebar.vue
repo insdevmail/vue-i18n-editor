@@ -1,12 +1,17 @@
 <template>
   <div :class="[$style['sidebar']]" class="bg-gray-800 p-3">
-    Sidebar
+    <ProjectTree />
   </div>
 </template>
 
 <script>
+import ProjectTree from './ProjectTree';
+
 export default {
   name: 'ProjectSidebar',
+  components: {
+    ProjectTree,
+  },
 };
 </script>
 
