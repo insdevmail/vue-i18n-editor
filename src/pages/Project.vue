@@ -2,20 +2,22 @@
   <div class="page">
     <ProjectToolbar />
     <div :class="[$style['content']]">
-      <ProjectSidebar class="w-3/12" :tree="structure" />
+      <ProjectSidebar class="w-3/12" :tree="structure" @select="handleSetPath" />
       <div :class="[$style['main']]" class="w-9/12">
-        <div :class="[$style['main__top']]" class="py-1 px-2 text-sm">
-          <span class="font-semibold">Translations:</span>
-          <span class="ml-2 font-thin">path.to.translation</span>
-        </div>
-        <TranslationItem />
-        <TranslationItem />
+        <template v-if="currentPath">
+          <div :class="[$style['main__top']]" class="py-1 px-2 text-sm">
+            <span class="font-semibold">Translations:</span>
+            <span class="ml-2 font-thin">{{ currentPath }}</span>
+          </div>
+          <TranslationItem v-for="item in currentStructure" :key="item.title" :item="item" />
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import _ from 'lodash';
 import { mapGetters } from 'vuex';
 import * as fse from 'fs-extra';
 import ProjectToolbar from '../../blocks/project/ProjectToolbar';
@@ -35,6 +37,7 @@ export default {
     return {
       structure: null,
       files: {},
+      currentPath: null,
     };
   },
   computed: {
@@ -42,6 +45,19 @@ export default {
       isProjectOpen: 'project/isProjectOpen',
       project: 'project/project',
     }),
+    currentStructure() {
+      if (this.currentPath) {
+        const content = _.get(this.files.en, this.currentPath);
+        return Object.keys(content).map(el => {
+          const fullPath = `${this.currentPath}.${el}`;
+          // _.get(this.files.en, fullPath)
+          return {
+            title: fullPath,
+          };
+        });
+      }
+      return [];
+    },
   },
   mounted() {
     if (!this.isProjectOpen) this.$router.push('/');
@@ -59,6 +75,9 @@ export default {
           }
         });
       });
+    },
+    handleSetPath(path) {
+      this.currentPath = path;
     },
   },
 };

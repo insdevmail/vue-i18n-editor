@@ -64,7 +64,9 @@ export default {
     },
 
     onClick(params) {
-      console.log(params);
+      if (params?.children?.[0].isLeaf) {
+        this.$emit('select', params.path);
+      }
     },
 
     addNode() {
