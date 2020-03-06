@@ -1,13 +1,9 @@
 <template>
   <div :class="[$style['item']]" class="py-2 px-3">
-    <div :class="[$style['item__title']]">{{ item.title }}</div>
-    <div :class="[$style['item__row']]">
-      <div :class="[$style['item__lang']]" class="text-sm pr-2">en</div>
-      <CInput :class="[$style['item__input']]" name="en" />
-    </div>
-    <div :class="[$style['item__row']]">
-      <div :class="[$style['item__lang']]" class="text-sm pr-2">ru</div>
-      <CInput :class="[$style['item__input']]" name="ru" />
+    <div :class="[$style['item__title']]">{{ item.id }}</div>
+    <div v-for="language in item.languages" :key="language.lang" :class="[$style['item__row']]">
+      <div :class="[$style['item__lang']]" class="text-sm pr-2">{{ language.lang }}</div>
+      <CInput :class="[$style['item__input']]" :name="language.lang" v-model="language.content" />
     </div>
   </div>
 </template>

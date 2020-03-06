@@ -9,7 +9,7 @@
             <span class="font-semibold">Translations:</span>
             <span class="ml-2 font-thin">{{ currentPath }}</span>
           </div>
-          <TranslationItem v-for="item in currentStructure" :key="item.title" :item="item" />
+          <TranslationItem v-for="item in currentStructure" :key="item.id" :item="item" />
         </template>
       </div>
     </div>
@@ -50,9 +50,12 @@ export default {
         const content = _.get(this.files.en, this.currentPath);
         return Object.keys(content).map(el => {
           const fullPath = `${this.currentPath}.${el}`;
-          // _.get(this.files.en, fullPath)
           return {
-            title: fullPath,
+            id: fullPath,
+            languages: this.project.languages.map(lang => ({
+              lang,
+              content: _.get(this.files[lang], fullPath),
+            })),
           };
         });
       }
