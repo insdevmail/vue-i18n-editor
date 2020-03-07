@@ -9,16 +9,16 @@ function buildTree(json, parent = null) {
         id: uuid(),
         name: el,
         dragDisabled: true,
+        addTreeNodeDisabled: true,
+        addLeafNodeDisabled: true,
+        editNodeDisabled: true,
+        delNodeDisabled: true,
         path: parent ? `${parent}.${el}` : el,
       };
       if (typeof json[el] === 'string') {
         nested.isLeaf = true;
       } else {
         nested.children = buildTree(json[el], parent ? `${parent}.${el}` : el);
-      }
-      const child = nested?.children?.[0];
-      if (child?.isLeaf) {
-        nested.addTreeNodeDisabled = true;
       }
       tree.push(nested);
     });
