@@ -20,8 +20,8 @@
 import _ from 'lodash';
 import { mapGetters } from 'vuex';
 import * as fse from 'fs-extra';
-import ProjectToolbar from '../../blocks/project/ProjectToolbar';
-import ProjectSidebar from '../../blocks/project/ProjectSidebar';
+import ProjectToolbar from '../blocks/project/ProjectToolbar';
+import ProjectSidebar from '../blocks/project/ProjectSidebar';
 import TranslationItem from '../components/translation/TranslationItem';
 
 import buildTree from '../utils/buildTree';
@@ -38,6 +38,7 @@ export default {
       structure: null,
       files: {},
       currentPath: null,
+      items: [],
     };
   },
   computed: {
@@ -46,15 +47,13 @@ export default {
       project: 'project/project',
     }),
     currentStructure() {
-      if (this.currentPath) {
-        const content = _.get(this.files.en, this.currentPath);
-        return Object.keys(content).map(el => {
-          const fullPath = `${this.currentPath}.${el}`;
+      if (this.items.length > 0) {
+        return this.items.map(el => {
           return {
-            id: fullPath,
+            id: el.path,
             languages: this.project.languages.map(lang => ({
               lang,
-              content: _.get(this.files[lang], fullPath),
+              content: _.get(this.files[lang], el.path),
             })),
           };
         });
@@ -79,8 +78,9 @@ export default {
         });
       });
     },
-    handleSetPath(path) {
-      this.currentPath = path;
+    handleSetPath(e) {
+      this.items = e.leafs;
+      this.currentPath = e.path;
     },
   },
 };

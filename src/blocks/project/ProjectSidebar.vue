@@ -26,6 +26,7 @@
 
 <script>
 import { VueTreeList, Tree, TreeNode } from 'vue-tree-list';
+import getLeas from '../../utils/getLeafs';
 
 export default {
   name: 'ProjectSidebar',
@@ -64,8 +65,18 @@ export default {
     },
 
     onClick(params) {
-      if (params?.children?.[0].isLeaf) {
-        this.$emit('select', params.path);
+      if (params.children) {
+        const leafs = getLeas([], params.children);
+        this.$emit('select', {
+          path: params.path,
+          leafs,
+        });
+      }
+      if (params.isLeaf) {
+        this.$emit('select', {
+          path: params.path,
+          leafs: [params],
+        });
       }
     },
 
