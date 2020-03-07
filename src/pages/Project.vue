@@ -9,7 +9,12 @@
             <span class="font-semibold">Translations:</span>
             <span class="ml-2 font-thin">{{ currentPath }}</span>
           </div>
-          <TranslationItem v-for="item in currentStructure" :key="item.id" :item="item" />
+          <TranslationItem
+            v-for="item in currentStructure"
+            :key="item.id"
+            :item="item"
+            @input="handleInput"
+          />
         </template>
       </div>
     </div>
@@ -62,8 +67,9 @@ export default {
     },
   },
   mounted() {
-    if (!this.isProjectOpen) this.$router.push('/');
-    else {
+    if (!this.isProjectOpen) {
+      this.$router.push('/');
+    } else {
       this.init();
     }
   },
@@ -81,6 +87,9 @@ export default {
     handleSetPath(e) {
       this.items = e.leafs;
       this.currentPath = e.path;
+    },
+    handleInput(val, lang, path) {
+      _.set(this.files[lang], path, val);
     },
   },
 };

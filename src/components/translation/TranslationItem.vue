@@ -3,7 +3,12 @@
     <div :class="[$style['item__title']]">{{ item.id }}</div>
     <div v-for="language in item.languages" :key="language.lang" :class="[$style['item__row']]">
       <div :class="[$style['item__lang']]" class="text-sm pr-2">{{ language.lang }}</div>
-      <CInput :class="[$style['item__input']]" :name="language.lang" v-model="language.content" />
+      <CInput
+        v-model="language.content"
+        :class="[$style['item__input']]"
+        :name="language.lang"
+        @input="$emit('input', $event, language.lang, item.id)"
+      />
     </div>
   </div>
 </template>
