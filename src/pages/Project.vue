@@ -1,6 +1,6 @@
 <template>
-  <div class="page">
-    <ProjectToolbar />
+  <div v-hotkey="keymap" class="page">
+    <ProjectToolbar @save="handleSave" />
     <div :class="[$style['content']]">
       <ProjectSidebar class="w-3/12" :tree="structure" @select="handleSetPath" />
       <div :class="[$style['main']]" class="w-9/12">
@@ -65,6 +65,11 @@ export default {
       }
       return [];
     },
+    keymap() {
+      return {
+        'ctrl+s': this.handleSave,
+      };
+    },
   },
   mounted() {
     if (!this.isProjectOpen) {
@@ -90,6 +95,13 @@ export default {
     },
     handleInput(val, lang, path) {
       _.set(this.files[lang], path, val);
+    },
+    handleSave() {
+      Object.keys(this.files).forEach(el => {
+        const { path } = this.project.files.find(file => file.lang === el);
+        const content = this.files[el];
+        fse.writeJson(path, content);
+      });
     },
   },
 };

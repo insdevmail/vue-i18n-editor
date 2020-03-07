@@ -68,7 +68,6 @@ export default {
   },
   methods: {
     handleClick(e) {
-      this.$emit('click', e);
       const { href } = this.$attrs;
       if (href && /^http(s)?:\/\//.test(href)) {
         e.preventDefault();

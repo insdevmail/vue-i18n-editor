@@ -2,9 +2,9 @@
   <div :class="[$style['toolbar']]" class="p-3 bg-gray-800">
     <div class="w-3/12">
       <CToolbarButton icon="solid/folder-open" class="mr-3">
-        Open project
+        New project
       </CToolbarButton>
-      <CToolbarButton icon="regular/save">
+      <CToolbarButton icon="regular/save" @click="$emit('save')">
         Save
       </CToolbarButton>
     </div>

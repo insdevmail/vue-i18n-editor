@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VModal from 'vue-js-modal';
 import Multiselect from 'vue-multiselect';
+import VueHotkey from 'v-hotkey';
 import App from './App';
 import router from './router';
 import store from './store';
@@ -30,6 +31,8 @@ Vue.component('CToolbarButton', CToolbarButton);
 
 Vue.use(VModal);
 Vue.component('Multiselect', Multiselect);
+
+Vue.use(VueHotkey);
 
 Vue.config.productionTip = false;
 
