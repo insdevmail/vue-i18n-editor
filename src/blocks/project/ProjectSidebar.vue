@@ -52,17 +52,16 @@ export default {
   },
   methods: {
     onDel(node) {
-      console.log(node);
       node.remove();
     },
 
-    onChangeName(params) {
-      console.log(params);
-    },
-
-    onAddNode(params) {
-      console.log(params);
-    },
+    // onChangeName(params) {
+    //   console.log(params);
+    // },
+    //
+    // onAddNode(params) {
+    //   console.log(params);
+    // },
 
     onClick(params) {
       if (params.children) {

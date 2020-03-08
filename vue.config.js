@@ -5,7 +5,6 @@ module.exports = {
       patterns: ['@/assets/styles/base/variables.scss', '@/assets/styles/base/function.scss'],
     },
   },
-
   configureWebpack: config => {
     config.module.rules
       .filter(r => r.test.toString().includes('svg'))
