@@ -39,6 +39,7 @@ export default {
           return false;
         }
         this.onConfirm(this.path);
+        this.$modal.hide('add-path');
       }
       return false;
     },

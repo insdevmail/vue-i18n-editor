@@ -110,15 +110,27 @@ export default {
     },
     handleAdd() {
       let path = this.currentPath;
-      const content = _.get(this.files[this.project.primary], path);
+      const primaryFile = this.files[this.project.primary];
+      const content = _.get(primaryFile, path);
       if (typeof content === 'string') {
         path = path.slice(0, path.lastIndexOf('.'));
       }
       this.$modal.show('add-path', {
         path,
-        validatePath: modalMath => validatePath(modalMath, this.files[this.project.primary], false),
+        validatePath: modalMath => validatePath(modalMath, primaryFile, false),
         onConfirm: newPath => {
-          console.log(newPath);
+          this.project.languages.forEach(el => {
+            _.set(this.files[el], newPath, '');
+          });
+          this.structure = buildTree(primaryFile);
+          const name = newPath.slice(newPath.lastIndexOf('.') + 1);
+          this.items.push({
+            name,
+            path: newPath,
+          });
+          if (!this.currentPath) {
+            this.currentPath = newPath;
+          }
         },
       });
     },
