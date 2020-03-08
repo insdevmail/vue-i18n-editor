@@ -9,10 +9,10 @@
       </CToolbarButton>
     </div>
     <div class="w-3/12">
-      <CToolbarButton icon="solid/plus-square" class="mr-3">
+      <CToolbarButton icon="solid/plus-square" class="mr-3" @click="$emit('add')">
         Add ID
       </CToolbarButton>
-      <CToolbarButton icon="solid/minus-square">
+      <CToolbarButton icon="solid/minus-square" @click="$emit('remove')">
         Remove ID
       </CToolbarButton>
     </div>

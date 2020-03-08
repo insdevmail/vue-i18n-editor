@@ -1,6 +1,6 @@
 <template>
   <div v-hotkey="keymap" class="page">
-    <ProjectToolbar @save="handleSave" />
+    <ProjectToolbar @save="handleSave" @add="handleAdd" @remove="handleRemove" />
     <div :class="[$style['content']]">
       <ProjectSidebar class="w-3/12" :tree="structure" @select="handleSetPath" />
       <div :class="[$style['main']]" class="w-9/12">
@@ -18,6 +18,7 @@
         </template>
       </div>
     </div>
+    <PopupPath />
   </div>
 </template>
 
@@ -29,7 +30,10 @@ import ProjectToolbar from '../blocks/project/ProjectToolbar';
 import ProjectSidebar from '../blocks/project/ProjectSidebar';
 import TranslationItem from '../components/translation/TranslationItem';
 
+import PopupPath from '../components/popup/PopupPath';
+
 import buildTree from '../utils/buildTree';
+import validatePath from '../utils/validatePath';
 
 export default {
   name: 'PageProject',
@@ -37,6 +41,7 @@ export default {
     ProjectToolbar,
     ProjectSidebar,
     TranslationItem,
+    PopupPath,
   },
   data() {
     return {
@@ -102,6 +107,23 @@ export default {
         const content = this.files[el];
         fse.writeJson(path, content);
       });
+    },
+    handleAdd() {
+      let path = this.currentPath;
+      const content = _.get(this.files[this.project.primary], path);
+      if (typeof content === 'string') {
+        path = path.slice(0, path.lastIndexOf('.'));
+      }
+      this.$modal.show('add-path', {
+        path,
+        validatePath: modalMath => validatePath(modalMath, this.files[this.project.primary], false),
+        onConfirm: newPath => {
+          console.log(newPath);
+        },
+      });
+    },
+    handleRemove() {
+      console.log('remove');
     },
   },
 };
