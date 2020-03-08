@@ -120,7 +120,7 @@ export default {
         validatePath: modalMath => validatePath(modalMath, primaryFile, false),
         onConfirm: newPath => {
           this.project.languages.forEach(el => {
-            _.set(this.files[el], newPath, '');
+            _.setWith(this.files[el], newPath, '', Object);
           });
           this.structure = buildTree(primaryFile);
           const name = newPath.slice(newPath.lastIndexOf('.') + 1);
