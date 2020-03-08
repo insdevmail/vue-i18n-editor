@@ -135,7 +135,22 @@ export default {
       });
     },
     handleRemove() {
-      console.log('remove');
+      if (this.currentPath) {
+        this.$modal.show('confirm', {
+          title: 'Remove ID',
+          text: `Do you want to remove id <span class="font-bold">${this.currentPath}</span>?`,
+          onConfirm: () => {
+            this.project.languages.forEach(el => {
+              _.unset(this.files[el], this.currentPath);
+              this.currentPath = null;
+              this.items = [];
+            });
+            const primaryFile = this.files[this.project.primary];
+            this.structure = buildTree(primaryFile);
+            this.$modal.hide('confirm');
+          },
+        });
+      }
     },
   },
 };
