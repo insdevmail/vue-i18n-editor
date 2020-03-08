@@ -22,6 +22,9 @@ const mutations = {
     initialState.title = data.title;
     initialState.primary = data.primary;
   },
+  clearState(initialState) {
+    Object.assign(initialState, emptyState);
+  },
 };
 
 const actions = {

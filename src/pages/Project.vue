@@ -1,6 +1,11 @@
 <template>
   <div v-hotkey="keymap" class="page">
-    <ProjectToolbar @save="handleSave" @add="handleAdd" @remove="handleRemove" />
+    <ProjectToolbar
+      @save="handleSave"
+      @add="handleAdd"
+      @remove="handleRemove"
+      @close="handleClose"
+    />
     <div :class="[$style['content']]">
       <ProjectSidebar class="w-3/12" :tree="structure" @select="handleSetPath" />
       <div :class="[$style['main']]" class="w-9/12">
@@ -24,7 +29,7 @@
 
 <script>
 import _ from 'lodash';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import * as fse from 'fs-extra';
 import ProjectToolbar from '../blocks/project/ProjectToolbar';
 import ProjectSidebar from '../blocks/project/ProjectSidebar';
@@ -84,6 +89,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      closeProject: 'project/clearState',
+    }),
     async init() {
       this.project.files.forEach(el => {
         fse.readJSON(el.path).then(res => {
@@ -151,6 +159,10 @@ export default {
           },
         });
       }
+    },
+    handleClose() {
+      this.closeProject();
+      this.$router.push('/');
     },
   },
 };
